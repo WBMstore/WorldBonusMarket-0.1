@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>World Bonus Market</title>
+    <meta name="description" content="First Virtual Market On Blockchain Powered By World Bonus Market Organization.">
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script src="https://unpkg.com/moralis/dist/moralis.js"></script>
+    <link rel="shortcut icon" href="https://bmtwealthcreation.s3.af-south-1.amazonaws.com/ico/favicon.ico">
+    <link rel="shortcut icon" href="https://bmtwealthcreation.s3.af-south-1.amazonaws.com/ico/wbmt-icon-57-precomposed.png" />
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-firestore.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jdenticon@3.1.1/dist/jdenticon.min.js" async
+    integrity="sha384-l0/0sn63N3mskDgRYJZA6Mogihu0VY3CusdLMiwpJ9LFPklOARUcOiWEIGGmFELx"
+    crossorigin="anonymous">
+</script>
+
+  </head>
+
+  <body>
+    <body><!-- Building the navbar-->
+      <div class="bg-blue-300 w-full">
+          <div class="header h-16 bg-blue-500 flex items-center">
+            <div class="logo w-1/5 h-16 ml-10"><a href="./index.html">
+              <img class="w-28 h-16 object-contain" src="https://bmtwealthcreation.s3.af-south-1.amazonaws.com/ico/wbmt-icon-57-precomposed.png"></a>
+           </div>
+              <input class="h-9 w-30 bg-blue-600 border border-blue-800 border-opacity-75 rounded-l-xl px-3 text-white ml-6 fcous:outline-none placeholder-white" id="search" type="text" placeholder="search...">
+              <div class="categories h-9 w-30 bg-blue-600 border border-blue-800 border-opacity-75 px-3 text-white flex items=center">
+                   categories  <!-- heroicons.com for icons-->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2 flex  justify-center" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="5" d="M19 13l-7 7-7-7" />
+                  </svg>
+              </div>
+              <div class="search-icon h-9 w-10 bg-yellow-300 rounded-r-xl flex justify-center items-center text-white">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+              </div>
+              <!--Right icons--> 
+              <div class="icons text-white flex items-center ml-auto mr-8 w-48 h-16 justify-around">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                    </svg>
+                    <!-- Cart icon-->
+                    <a href="cart.html">
+                      <div class="cart-icon relative h-10 w-10 bg-yellow-300 flex items-center justify-center rounded-xl">
+                          <div class="cart-item-number text-gray-800 text-xs absolute -top-1 -right-1 h-4 w-4 bg-white rounded-full flex justify-center items-center"></div>
+                          <svg class="h-4 w-4 text-gray-600" xmlns="http://owww.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                          </svg>
+                      </div>
+                  </a>
+              </div>
+              <div class="Navbar__ConnectedDiv-sc-1fv68do-6 cGWfaG text-white" ><button class="connect-wallet" id="btn-login">Metamask Login</button>
+            </div>
+          </div><!--the navbar end-->
+      <div class="main h-screen flex">
+          <div class="hidden md:block border-t-2 bg-blue-400 main-sidebar w-1/5 bg-blue-500 p-6">
+            <div class="sidebar-categories">
+                <div class="sidebar-main-category text-white 500 cursor-pointer flex font-bold p-2 bg-yellow-300 rounded-lg">
+                    <span class="w-8">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>  
+                    </span> 
+                    <span>Categories</span>
+                </div>
+                <div class="sidebar-main-category text-white cursor-pointer flex font-bold p-2 mb-2">
+                  <span class="w-8"></span>
+                  <span><a href="/shopping.html" target="_blank" rel="noopener noreferrer">General Market</a>↗</span>
+              </div>
+              <div class="sidebar-main-category text-white cursor-pointer flex font-bold p-2 mb-2">
+                  <span class="w-8"></span>
+                  <span><a href="#" target="_blank" rel="noopener noreferrer">Bonus Swap</a>↗</span>
+              </div>
+              <div class="sidebar-main-category text-white cursor-pointer flex font-bold p-2 mb-2">
+                <span class="w-8"></span>
+                <span><a href="/nftminter.html" target="_blank" rel="noopener noreferrer">NFT Minter</a>↗</span>
+              </div>
+              <div class="sidebar-main-category text-white cursor-pointer flex font-bold p-2 mb-2">
+                  <span class="w-8"></span>
+                  <span><a href="#" target="_blank" rel="noopener noreferrer">NFT Market</a>↗</span>
+              </div>
+              <div class="sidebar-main-category text-white cursor-pointer flex font-bold p-2 hover:bg-yellow-300 rounded-xl mb-4">
+                  <span class="w-8">
+                      <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                  </span>
+                  <span><a href="#" target="_blank" rel="noopener noreferrer">Earn With Us</a>↗</span>
+              </div>
+              <div class="sidebar-main-category text-white cursor-pointer flex font-bold p-2 hover:bg-yellow-300 rounded-xl mb-4">
+                  <span class="w-8">
+                      <i class="far fa-question-circle"></i>
+                  </span>
+                  <span><a href="#" target="_blank" rel="noopener noreferrer">Help</a></span>
+              </div>
+              <div class="sidebar-main-category text-white flex font- bold p-2">
+                  <span>SOCIALS</span>
+              </div>
+              <div class="sidebar-main-category text-white cursor-pointer flex font-bold p-2 hover:bg-yellow-300 rounded-xl mb-4">
+                <span class="w-8">
+                  <i class="fab fa-telegram"></i>
+                </span>
+                <span><a href="https://t.me/worldbonsmarket" target="_blank" rel="noopener noreferrer">Telegram</a></span>
+              </div>
+              <div class="sidebar-main-category text-white cursor-pointer flex font-bold p-2 hover:bg-yellow-300 rounded-xl mb-4">
+                <span class="w-8">
+                  <i class="fab fa-twitter-square"></i>
+                </span>
+                <a href="https://twitter.com/TokensWbmt" target="_blank" rel="noopener noreferrer">Twitter</a>
+              </div>
+              <div class="sidebar-main-category text-white cursor-pointer flex font-bold p-2 hover:bg-yellow-300 rounded-xl mb-4">
+                <span class="w-8">
+                  <i class="fab fa-facebook"></i>
+                </span>
+                <a href="https://facebook.com/groups/wbmtc" target="_blank" rel="noopener noreferrer">Facebook</a>
+              </div>
+          </div>
+        </div>
+        <div class="main-section flex-1 p-6">
+          <div class="main-section-ads h-30  w-100 rounded-lg flex items-end"></div>
+          
+                
+        <div class="main-section-deals mt-5">
+              <h1 class="text-2xl font-bold text-gray-700 mb-5">Hot Deals 🔥</h1>
+              <div class="main-section-products flex">
+              </div>
+        </div>
+
+        <div class="main-section-comintg-soon  flex justify-center mt-5">
+          <h1 class="text-2xl font-bold text-gray-700 mb-5 my-8 font-black text-4xl space-y-5 py-8">Coming Soon</h1>
+          <img class="w-50 h-50 object-contain flex justify-center " src="https://bmtwealthcreation.s3.af-south-1.amazonaws.com/ico/photo1637309000.jpeg"></a>
+          <div class="main-section-products flex">
+          </div>
+      </div>
+  </div>
+</div>
+        
+    <!----footer---->
+    <div class="footer">
+      <div class="footer-content bg-blue-500 flex ">
+        <div class="footer-section about md:container md:mx-auto justify-start ">
+          <h1 class="my-8 font-bold text-2xl">
+            <span class="text-yellow-400">WORLDBONUSMARKET</span>
+         </h1>
+          <p class="overflow-ellipsis overflow-hidden font-bold">
+            World Bonus Market is an e-commerce platform where you can enjoy massive discounts on our entire product plus some physical product which in turn help reduce the cost of living anywhere you are.
+          </p>
+          <p class="overflow-ellipsis overflow-hidden font-bold">
+            World Bonus Market also provides an advertising channel for all your program and product. In future we will provide more opportunity for you to sell your product on our store. Income through online business based providing laser-targeted advertising and a great crypto income opportunity.
+          </p>
+        </div>
+  
+        <div class="footer-section links">
+          <h2 class="font-bold">Quick Links</h2>
+          <br>
+          <ul>
+            <a href="#">
+              <li class="font-bold">Events</li>
+            </a>
+            <a href="#">
+              <li class="font-bold">Team</li>
+            </a>
+            <a href="#">
+              <li class="font-bold">About</li>
+            </a>
+            <a href="./privacy-policy.html">
+              <li class="font-bold">privacy policy</li>
+            </a>
+            <a href="./termsandcond.html">
+              <li class="font-bold">Terms and Conditions</li>
+            </a>
+          </ul>
+          <div class="socials">
+            <a href="https://facebook.com/groups/wbmtc"><i class="fab fa-facebook"></i></a>
+            <a href="https://t.me/worldbonsmarket"><i class="fab fa-telegram"></i></a>
+            <a href="https://twitter.com/TokensWbmt"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="info@worldbonsmarket.com"><span><i class="fas fa-envelope"></i> &nbsp; info@worldbonsmarket.com</span></a>
+            
+          </div>
+        </div>
+  
+        <div class="footer-section contact-form  flex text-white ">
+          <h2 class="font-bold">Contact us</h2>
+          <br>
+          <form action="index.html" method="post">
+            <input type="email" name="email" class="text-input contact-input" placeholder="Your email address...">
+            <textarea rows="4" name="message" class="text-input contact-input" placeholder="Your message..."></textarea>
+            <button type="submit" class="btn btn-big contact-btn object-none object-right-bottom">
+              <i class="fas fa-envelope font-bold"></i>
+              Send
+            </button>
+          </form>
+        
+        </div>
+  
+      </div>
+          <div class="footer-bottom flex justify-center bg-blue-600 text-white h-8">
+            &copy; worldbonsmarket.com | Desingned by WBM TOP-TECH
+          </div>
+          <script type="text/javascript" src="/wallet.js"></script>
+  </body>
+</html>
