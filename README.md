@@ -1,4 +1,4 @@
-# WorldBonusMarket-0.1
+# WorldBonusMarket
 Here Is Our Road Map
 1. Creating a function e-commerce website (traditional)
 2. Turning it to web3
